@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>찾아오시는 길</title>
+
+    <!-- https://michalsnik.github.io/aos/ -->
+    <!-- https://github.com/michalsnik/aos -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <!-- 찾아오시는 길 CSS 적용(location.css)-->
+    <link rel="stylesheet" href="css/location.css" >   
+
+</head>
+<body>
+        <h1 class="location_title">방송통신위원회</h1>
+        <div class="location_text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed minima, ratione iste voluptatem aut obcaecati reiciendis nesciunt delectus ex aliquid eaque atque quod laudantium aperiam illo eos consequatur, nobis pariatur.</div>
+        <div class="location_title" data-aos="fade" data-aos-duration="2500">찾아오시는길 (약도)</div>
+        <div class="map_img" data-aos="fade" data-aos-duration="2500"><img src="locationImg/location_image.jpg"></div>
+
+        <div class="location_title" data-aos="fade" data-aos-duration="2500">찾아오시는길 (Kakao Map)</div>
+        <div id="map" style="width:90%;height:400px;"></div> <!-- 찾아오시는길(kakao map)-->
+        <div id="map" data-aos="fade" data-aos-duration="2500" style="width:50%;height:500px; margin:10px auto">
+        </div>
+
+        <div class="location_common">
+            <div class="location_information" data-aos="fade" data-aos-duration="2500">
+                <h2>LOCATION INFORMATION</h2>
+                <h2><small>방송통신위원회 정보</small></h2><br><br>
+                <h3>주소</h3>
+                <!-- h3>small -->
+                <h3><small>(13809)경기도 과천시 관문로 47, 2동</small></h3>
+                <h3>대표전화번호</h3>                
+                <h3><small>02-1234-5678</small></h3>
+                <h3>과천청사관리소</h3>                
+                <h3><small>02-1234-7979</small></h3>
+            </div>
+            <div class="location_information_add" data-aos="fade" data-aos-duration="2500">
+                <!-- 교통(traffic) 정보 추가 -->
+                <div class="location_traffic">
+                    <div class="traffic_details">
+                        <img src="locationImg/location_bus_icon.svg" alt="버스 아이콘">
+                        <h2>버스</h2>
+                    </div>
+                    <h2><small>방송통신위원회 정류장 하차 <br> <br> 일반 지선(녹색) 버스 : 1-1, 9, 9-3, 11-1, 11-2, 11-3, 11-5, 103, 777, 917</small></h2>
+                </div>
+                <div class="location_traffic">
+                    <div class="traffic_details">
+                        <img src="locationImg/location_subway_icon.svg" alt="지하철 아이콘">
+                        <h2>지하철</h2>
+                    </div>
+                    <h2><small>4호선 정부과천청사 하차 <br> <br> 7번 또는 8번 출구로 나와서 150m 직진 지점</small></h2>
+                </div>
+                <div class="location_traffic">
+                    <div class="traffic_details">
+                        <img src="locationImg/location_navigation_icon.svg" alt="네비게이션 아이콘">
+                        <h2>네비게이션(Navigation)</h2>
+                    </div>
+                    <h2><small>아이나비 네비, 구글 네비 등 네비게이션 "방송통신위원회" 검색</small></h2>
+                </div>
+                <div class="location_traffic">
+                    <div class="traffic_details">
+                        <img src="locationImg/location_parking_icon.svg" alt="주차 아이콘">
+                        <h2>주차안내</h2>
+                    </div>
+                    <h2><small>방송통신위원회 고객안내센터 1층 주차장 이용</small></h2>
+                </div>
+            </div>
+        </div>
+        <!-- 지도에 사용자 컨트롤 올리기
+        https://apis.map.kakao.com/web/sample/addMapCustomControl/ -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=af703e58b8f32072dce7b2845a3df71e"></script>
+    <script>
+        AOS.init();
+
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = { 
+            center: new kakao.maps.LatLng(37.4272395, 126.9868669), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };  
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+            
+        // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+        // https://apis.map.kakao.com/web/documentation/#MapTypeControl
+        var mapTypeControl = new kakao.maps.MapTypeControl();
+
+        // 지도 오른쪽 위에 지도 타입 컨트롤이 표시되도록 지도에 컨트롤을 추가한다.
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+        // 아래와 같이 옵션을 입력하지 않아도 된다
+        var zoomControl = new kakao.maps.ZoomControl();
+
+        // 지도 오른쪽에 줌 컨트롤이 표시되도록 지도에 컨트롤을 추가한다.
+        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+      // Kakao Map 마커 생성하기(카카오 개발자센터 Kakao Maps API Sample 참고)
+      // https://apis.map.kakao.com/web/sample/basicMarker/
+
+      // 마커가 표시될 위치입니다 
+    var markerPosition  = new kakao.maps.LatLng(37.4272395, 126.9868669); 
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+    // marker.setMap(null);    
+
+    // window 객체 활용 map 안에 마커 중앙 표시 : resize 처리(추가 코딩)
+    window.addEventListener('resize', function(){
+        map.setCenter(new kakao.maps.LatLng(37.4272395, 126.9868669))
+    });
+    </script>
+
+
+
+    
+</body>
+</html>
+
